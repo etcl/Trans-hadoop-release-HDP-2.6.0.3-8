@@ -54,20 +54,20 @@ public class RMAppsBlock extends AppsBlock {
   @Override
   protected void renderData(Block html) {
     TBODY<TABLE<Hamlet>> tbody =
-        html.table("#apps").thead().tr().th(".id", "ID").th(".user", "User")
-          .th(".name", "Name").th(".type", "Application Type")
-          .th(".queue", "Queue").th(".priority", "Application Priority")
-          .th(".starttime", "StartTime")
-          .th(".finishtime", "FinishTime").th(".state", "State")
-          .th(".finalstatus", "FinalStatus")
-          .th(".runningcontainer", "Running Containers")
-          .th(".allocatedCpu", "Allocated CPU VCores")
-          .th(".allocatedMemory", "Allocated Memory MB")
-          .th(".queuePercentage", "% of Queue")
-          .th(".clusterPercentage", "% of Cluster")
-          .th(".progress", "Progress")
-          .th(".ui", "Tracking UI")
-          .th(".blacklisted", "Blacklisted Nodes")._()
+        html.table("#apps").thead().tr().th(".id", "ID").th(".user", "用户")
+          .th(".name", "名称").th(".type", "应用类型")
+          .th(".queue", "队列").th(".priority", "优先级")
+          .th(".starttime", "开始时间")
+          .th(".finishtime", "结束时间").th(".state", "状态")
+          .th(".finalstatus", "结果")
+          .th(".runningcontainer", "运行Containers")
+          .th(".allocatedCpu", "分配核数")
+          .th(".allocatedMemory", "分配内存")
+          .th(".queuePercentage", "队列比例")
+          .th(".clusterPercentage", "集群比例")
+          .th(".progress", "进度")
+          .th(".ui", "运行图")
+          .th(".blacklisted", "失效节点")._()
           ._().tbody();
 
     StringBuilder appsTableData = new StringBuilder("[\n");

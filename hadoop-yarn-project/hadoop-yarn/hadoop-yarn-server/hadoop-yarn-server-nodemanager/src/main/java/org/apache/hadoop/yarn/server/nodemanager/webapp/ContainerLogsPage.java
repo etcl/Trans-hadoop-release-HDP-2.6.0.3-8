@@ -48,20 +48,20 @@ import org.apache.hadoop.yarn.webapp.view.HtmlBlock;
 import com.google.inject.Inject;
 
 public class ContainerLogsPage extends NMView {
-  
+
   public static final String REDIRECT_URL = "redirect.url";
-  
+
   @Override protected void preHead(Page.HTML<_> html) {
     String redirectUrl = $(REDIRECT_URL);
     if (redirectUrl == null || redirectUrl.isEmpty()) {
-      set(TITLE, join("Logs for ", $(CONTAINER_ID)));
+      set(TITLE, join("日志 ", $(CONTAINER_ID)));
     } else {
       if (redirectUrl.equals("false")) {
         set(TITLE, join("Failed redirect for ", $(CONTAINER_ID)));
         //Error getting redirect url. Fall through.
       }
     }
-    
+
     set(ACCORDION_ID, "nav");
     set(initID(ACCORDION, "nav"), "{autoHeight:false, active:0}");
   }
@@ -72,7 +72,7 @@ public class ContainerLogsPage extends NMView {
   }
 
   public static class ContainersLogsBlock extends HtmlBlock implements
-      YarnWebParams {    
+      YarnWebParams {
     private final Context nmContext;
 
     @Inject
@@ -114,7 +114,7 @@ public class ContainerLogsPage extends NMView {
         html.h1(ex.getMessage());
       }
     }
-    
+
     private void printLogFile(Block html, File logFile) {
       long start =
           $("start").isEmpty() ? -4 * 1024 : Long.parseLong($("start"));
@@ -138,16 +138,16 @@ public class ContainerLogsPage extends NMView {
           html.h1(ex.getMessage());
           return;
         }
-        
+
         try {
           long toRead = end - start;
           if (toRead < logFile.length()) {
             html.p()._("Showing " + toRead + " bytes. Click ")
-                .a(url("containerlogs", $(CONTAINER_ID), $(APP_OWNER), 
+                .a(url("containerlogs", $(CONTAINER_ID), $(APP_OWNER),
                     logFile.getName(), "?start=0"), "here").
                     _(" for full log")._();
           }
-          
+
           IOUtils.skipFully(logByteStream, start);
           InputStreamReader reader =
               new InputStreamReader(logByteStream, Charset.forName("UTF-8"));
@@ -184,7 +184,7 @@ public class ContainerLogsPage extends NMView {
         }
       }
     }
-    
+
     private void printLogFileDirectory(Block html, List<File> containerLogsDirs) {
       // Print out log types in lexical order
       Collections.sort(containerLogsDirs);

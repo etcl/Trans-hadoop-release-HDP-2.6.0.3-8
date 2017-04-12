@@ -26,7 +26,7 @@ import org.apache.hadoop.yarn.webapp.YarnWebParams;
 import com.google.inject.Inject;
 
 public class NMController extends Controller implements YarnWebParams {
-  
+
   @Inject
   public NMController(RequestContext requestContext) {
     super(requestContext);
@@ -35,11 +35,11 @@ public class NMController extends Controller implements YarnWebParams {
   @Override
   // TODO: What use of this with info() in?
   public void index() {
-    setTitle(join("NodeManager - ", $(NM_NODENAME)));
+    setTitle(join("节点管理器 - ", $(NM_NODENAME)));
   }
 
   public void info() {
-    render(NodePage.class);    
+    render(NodePage.class);
   }
 
   public void node() {

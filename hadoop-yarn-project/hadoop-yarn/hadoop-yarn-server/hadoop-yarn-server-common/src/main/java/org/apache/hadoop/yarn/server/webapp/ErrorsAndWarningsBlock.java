@@ -60,12 +60,12 @@ public class ErrorsAndWarningsBlock extends HtmlBlock {
     if (log instanceof Log4JLogger) {
       html._(ErrorMetrics.class);
       html._(WarningMetrics.class);
-      html.div().button().$onclick("reloadPage()").b("View data for the last ")
-        ._().select().$id("cutoff").option().$value("60")._("1 min")._()
-        .option().$value("300")._("5 min")._().option().$value("900")
-        ._("15 min")._().option().$value("3600")._("1 hour")._().option()
-        .$value("21600")._("6 hours")._().option().$value("43200")
-        ._("12 hours")._().option().$value("86400")._("24 hours")._()._()._();
+      html.div().button().$onclick("reloadPage()").b("查看最新记录 ")
+        ._().select().$id("cutoff").option().$value("60")._("1 分钟")._()
+        .option().$value("300")._("5 分钟")._().option().$value("900")
+        ._("15 分钟")._().option().$value("3600")._("1 小时")._().option()
+        .$value("21600")._("6 小时")._().option().$value("43200")
+        ._("12 小时")._().option().$value("86400")._("24 小时")._()._()._();
 
       String script = "function reloadPage() {"
           + " var timePeriod = $(\"#cutoff\").val();"
@@ -87,9 +87,9 @@ public class ErrorsAndWarningsBlock extends HtmlBlock {
       }
       List<Long> cutoff = new ArrayList<>();
       Hamlet.TBODY<Hamlet.TABLE<Hamlet>> errorsTable =
-          html.table("#messages").thead().tr().th(".message", "Message")
-            .th(".type", "Type").th(".count", "Count")
-            .th(".lasttime", "Latest Message Time")._()._().tbody();
+        html.table("#messages").thead().tr().th(".message", "信息")
+          .th(".type", "类型").th(".count", "总数")
+          .th(".lasttime", "更新时间")._()._().tbody();
 
       // cutoff has to be in seconds
       cutoff.add((Time.now() - cutoffPeriodSeconds * 1000) / 1000);
@@ -178,13 +178,13 @@ public class ErrorsAndWarningsBlock extends HtmlBlock {
             html.div().$class("metrics").$style("padding-bottom: 20px");
         div.h3(tableHeading).table("#metricsoverview").thead()
           .$class("ui-widget-header").tr().th().$class("ui-state-default")
-          ._("Last 1 minute")._().th().$class("ui-state-default")
-          ._("Last 5 minutes")._().th().$class("ui-state-default")
-          ._("Last 15 minutes")._().th().$class("ui-state-default")
-          ._("Last 1 hour")._().th().$class("ui-state-default")
-          ._("Last 6 hours")._().th().$class("ui-state-default")
-          ._("Last 12 hours")._().th().$class("ui-state-default")
-          ._("Last 24 hours")._()._()._().tbody().$class("ui-widget-content")
+          ._("最近一分钟")._().th().$class("ui-state-default")
+          ._("最近五分钟")._().th().$class("ui-state-default")
+          ._("最近十五分钟")._().th().$class("ui-state-default")
+          ._("最近一小时")._().th().$class("ui-state-default")
+          ._("最近六小时")._().th().$class("ui-state-default")
+          ._("最近12小时")._().th().$class("ui-state-default")
+          ._("最近24小时")._()._()._().tbody().$class("ui-widget-content")
           .tr().td(String.valueOf(values.get(0)))
           .td(String.valueOf(values.get(1))).td(String.valueOf(values.get(2)))
           .td(String.valueOf(values.get(3))).td(String.valueOf(values.get(4)))
@@ -200,7 +200,7 @@ public class ErrorsAndWarningsBlock extends HtmlBlock {
     @Inject
     ErrorMetrics(ViewContext ctx) {
       super(ctx);
-      tableHeading = "Error Metrics";
+      tableHeading = "错误信息";
     }
 
     @Override
@@ -218,7 +218,7 @@ public class ErrorsAndWarningsBlock extends HtmlBlock {
     @Inject
     WarningMetrics(ViewContext ctx) {
       super(ctx);
-      tableHeading = "Warning Metrics";
+      tableHeading = "警告信息";
     }
 
     @Override

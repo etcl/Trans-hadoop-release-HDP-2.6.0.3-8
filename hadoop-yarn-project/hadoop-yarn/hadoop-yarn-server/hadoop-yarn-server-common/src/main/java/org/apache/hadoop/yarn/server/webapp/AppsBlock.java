@@ -95,7 +95,7 @@ public class AppsBlock extends HtmlBlock {
 
   @Override
   public void render(Block html) {
-    setTitle("Applications");
+    setTitle("应用");
 
     try {
       fetchData();
@@ -111,12 +111,12 @@ public class AppsBlock extends HtmlBlock {
 
   protected void renderData(Block html) {
     TBODY<TABLE<Hamlet>> tbody =
-        html.table("#apps").thead().tr().th(".id", "ID").th(".user", "User")
-          .th(".name", "Name").th(".type", "Application Type")
-          .th(".queue", "Queue").th(".starttime", "StartTime")
-          .th(".finishtime", "FinishTime").th(".state", "State")
-          .th(".finalstatus", "FinalStatus").th(".progress", "Progress")
-          .th(".ui", "Tracking UI")._()._().tbody();
+      html.table("#apps").thead().tr().th(".id", "ID").th(".user", "用户")
+        .th(".name", "名称").th(".type", "应用类型")
+        .th(".queue", "队列").th(".starttime", "开始时间")
+        .th(".finishtime", "结束时间").th(".state", "状态")
+        .th(".finalstatus", "结果状态").th(".progress", "进度条")
+        .th(".ui", "运行图")._()._().tbody();
 
     StringBuilder appsTableData = new StringBuilder("[\n");
     for (ApplicationReport appReport : appReports) {

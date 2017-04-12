@@ -76,7 +76,7 @@ public class RMAppLogAggregationStatusBlock extends HtmlBlock {
       return;
     }
 
-    setTitle(join("Application ", aid));
+    setTitle(join("应用 ", aid));
 
     // Add LogAggregationStatus description table
     // to explain the meaning of different LogAggregationStatus

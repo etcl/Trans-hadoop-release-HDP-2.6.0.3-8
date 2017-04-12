@@ -86,21 +86,21 @@ public class RMAppBlock extends AppBlock{
     DIV<Hamlet> pdiv = html.
         _(InfoBlock.class).
         div(_INFO_WRAP);
-    info("Application Overview").clear();
+    info("应用监控信息").clear();
     info("Application Metrics")
-        ._("Total Resource Preempted:",
+        ._("优先资源:",
           appMetrics == null ? "N/A" : appMetrics.getResourcePreempted())
-        ._("Total Number of Non-AM Containers Preempted:",
+        ._("Non-AM Containers优先数量:",
           appMetrics == null ? "N/A"
               : appMetrics.getNumNonAMContainersPreempted())
-        ._("Total Number of AM Containers Preempted:",
+        ._("AM Containers优先数量:",
           appMetrics == null ? "N/A"
               : appMetrics.getNumAMContainersPreempted())
-        ._("Resource Preempted from Current Attempt:",
+        ._("当前优先资源:",
           attemptResourcePreempted)
-        ._("Number of Non-AM Containers Preempted from Current Attempt:",
+        ._("Non-AM Containers当前优先数量:",
           attemptNumNonAMContainerPreempted)
-        ._("Aggregate Resource Allocation:",
+        ._("资源分配汇总:",
           String.format("%d MB-seconds, %d vcore-seconds",
               appMetrics == null ? "N/A" : appMetrics.getMemorySeconds(),
               appMetrics == null ? "N/A" : appMetrics.getVcoreSeconds()));
@@ -113,9 +113,9 @@ public class RMAppBlock extends AppBlock{
       Collection<ApplicationAttemptReport> attempts) {
     // Application Attempt Table
     Hamlet.TBODY<Hamlet.TABLE<Hamlet>> tbody =
-        html.table("#attempts").thead().tr().th(".id", "Attempt ID")
-            .th(".started", "Started").th(".node", "Node").th(".logs", "Logs")
-            .th(".blacklistednodes", "Blacklisted Nodes")._()._().tbody();
+      html.table("#attempts").thead().tr().th(".id", "尝试 ID")
+          .th(".started", "开始时间").th(".node", "节点").th(".logs", "日志")
+          .th(".blacklistednodes", "失效节点")._()._().tbody();
 
     RMApp rmApp = this.rm.getRMContext().getRMApps().get(this.appID);
     if (rmApp == null) {

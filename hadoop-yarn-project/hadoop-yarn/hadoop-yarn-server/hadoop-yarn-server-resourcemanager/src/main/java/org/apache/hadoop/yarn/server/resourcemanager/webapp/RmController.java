@@ -46,7 +46,7 @@ public class RmController extends Controller {
   }
 
   public void about() {
-    setTitle("About the Cluster");
+    setTitle("集群信息");
     render(AboutPage.class);
   }
 
@@ -86,13 +86,13 @@ public class RmController extends Controller {
       render(CapacitySchedulerPage.class);
       return;
     }
-    
+
     if (rs instanceof FairScheduler) {
       setTitle("Fair Scheduler");
       render(FairSchedulerPage.class);
       return;
     }
-    
+
     setTitle("Default Scheduler");
     render(DefaultSchedulerPage.class);
   }
@@ -104,7 +104,7 @@ public class RmController extends Controller {
   public void submit() {
     setTitle("Application Submission Not Allowed");
   }
-  
+
   public void nodelabels() {
     setTitle("Node Labels");
     render(NodeLabelsPage.class);

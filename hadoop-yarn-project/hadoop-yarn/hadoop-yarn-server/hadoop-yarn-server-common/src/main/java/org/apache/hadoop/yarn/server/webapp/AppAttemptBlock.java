@@ -128,7 +128,7 @@ public class AppAttemptBlock extends HtmlBlock {
 
     AppAttemptInfo appAttempt = new AppAttemptInfo(appAttemptReport);
 
-    setTitle(join("Application Attempt ", attemptid));
+    setTitle(join("应用尝试 ", attemptid));
 
     String node = "N/A";
     if (appAttempt.getHost() != null && appAttempt.getRpcPort() >= 0
@@ -154,8 +154,8 @@ public class AppAttemptBlock extends HtmlBlock {
     // Container Table
     TBODY<TABLE<Hamlet>> tbody =
         html.table("#containers").thead().tr().th(".id", "Container ID")
-          .th(".node", "Node").th(".exitstatus", "Container Exit Status")
-          .th(".logs", "Logs")._()._().tbody();
+          .th(".node", "节点").th(".exitstatus", "Container退出状态")
+          .th(".logs", "日志")._()._().tbody();
 
     StringBuilder containersTableData = new StringBuilder("[\n");
     for (ContainerReport containerReport : containers) {
@@ -236,7 +236,7 @@ public class AppAttemptBlock extends HtmlBlock {
   }
 
   protected void createAttemptHeadRoomTable(Block html) {
-    
+
   }
 
   protected void createTablesForAttemptMetrics(Block html) {

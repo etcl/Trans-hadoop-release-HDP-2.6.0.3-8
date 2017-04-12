@@ -51,33 +51,33 @@ public class MetricsOverviewTable extends HtmlBlock {
   protected void render(Block html) {
     //Yes this is a hack, but there is no other way to insert
     //CSS in the correct spot
-    html.style(".metrics {margin-bottom:5px}"); 
-    
-    ClusterMetricsInfo clusterMetrics = 
+    html.style(".metrics {margin-bottom:5px}");
+
+    ClusterMetricsInfo clusterMetrics =
  new ClusterMetricsInfo(this.rm);
-    
+
     DIV<Hamlet> div = html.div().$class("metrics");
-    
-    div.h3("Cluster Metrics").
+
+    div.h3("集群监控").
     table("#metricsoverview").
     thead().$class("ui-widget-header").
       tr().
-        th().$class("ui-state-default")._("Apps Submitted")._().
-        th().$class("ui-state-default")._("Apps Pending")._().
-        th().$class("ui-state-default")._("Apps Running")._().
-        th().$class("ui-state-default")._("Apps Completed")._().
-        th().$class("ui-state-default")._("Containers Running")._().
-        th().$class("ui-state-default")._("Memory Used")._().
-        th().$class("ui-state-default")._("Memory Total")._().
-        th().$class("ui-state-default")._("Memory Reserved")._().
-        th().$class("ui-state-default")._("VCores Used")._().
-        th().$class("ui-state-default")._("VCores Total")._().
-        th().$class("ui-state-default")._("VCores Reserved")._().
-        th().$class("ui-state-default")._("Active Nodes")._().
-        th().$class("ui-state-default")._("Decommissioned Nodes")._().
-        th().$class("ui-state-default")._("Lost Nodes")._().
-        th().$class("ui-state-default")._("Unhealthy Nodes")._().
-        th().$class("ui-state-default")._("Rebooted Nodes")._().
+      th().$class("ui-state-default")._("提交任务")._().
+      th().$class("ui-state-default")._("等待任务")._().
+      th().$class("ui-state-default")._("运行任务")._().
+      th().$class("ui-state-default")._("完成任务")._().
+      th().$class("ui-state-default")._("运行Containers")._().
+      th().$class("ui-state-default")._("消耗内存")._().
+      th().$class("ui-state-default")._("总内存")._().
+      th().$class("ui-state-default")._("保留内存")._().
+      th().$class("ui-state-default")._("已用核数")._().
+      th().$class("ui-state-default")._("总核数")._().
+      th().$class("ui-state-default")._("保留核数")._().
+      th().$class("ui-state-default")._("活跃节点")._().
+      th().$class("ui-state-default")._("删除节点")._().
+      th().$class("ui-state-default")._("丢失节点")._().
+      th().$class("ui-state-default")._("异常节点")._().
+      th().$class("ui-state-default")._("重启节点")._().
       _().
     _().
     tbody().$class("ui-widget-content").
@@ -87,7 +87,7 @@ public class MetricsOverviewTable extends HtmlBlock {
         td(String.valueOf(clusterMetrics.getAppsRunning())).
         td(
             String.valueOf(
-                clusterMetrics.getAppsCompleted() + 
+                clusterMetrics.getAppsCompleted() +
                 clusterMetrics.getAppsFailed() + clusterMetrics.getAppsKilled()
                 )
             ).
@@ -105,28 +105,28 @@ public class MetricsOverviewTable extends HtmlBlock {
         td().a(url("nodes/rebooted"),String.valueOf(clusterMetrics.getRebootedNodes()))._().
       _().
     _()._();
-    
+
     String user = request().getRemoteUser();
     if (user != null) {
       UserMetricsInfo userMetrics = new UserMetricsInfo(this.rm, user);
       if (userMetrics.metricsAvailable()) {
-        div.h3("User Metrics for " + user).
+        div.h3("监控用户 " + user).
         table("#usermetricsoverview").
         thead().$class("ui-widget-header").
           tr().
-            th().$class("ui-state-default")._("Apps Submitted")._().
-            th().$class("ui-state-default")._("Apps Pending")._().
-            th().$class("ui-state-default")._("Apps Running")._().
-            th().$class("ui-state-default")._("Apps Completed")._().
-            th().$class("ui-state-default")._("Containers Running")._().
-            th().$class("ui-state-default")._("Containers Pending")._().
-            th().$class("ui-state-default")._("Containers Reserved")._().
-            th().$class("ui-state-default")._("Memory Used")._().
-            th().$class("ui-state-default")._("Memory Pending")._().
-            th().$class("ui-state-default")._("Memory Reserved")._().
-            th().$class("ui-state-default")._("VCores Used")._().
-            th().$class("ui-state-default")._("VCores Pending")._().
-            th().$class("ui-state-default")._("VCores Reserved")._().
+          th().$class("ui-state-default")._("提交任务")._().
+              th().$class("ui-state-default")._("等待任务")._().
+              th().$class("ui-state-default")._("运行任务")._().
+              th().$class("ui-state-default")._("完成任务")._().
+              th().$class("ui-state-default")._("运行Containers")._().
+              th().$class("ui-state-default")._("等待Containers")._().
+              th().$class("ui-state-default")._("保留Containers")._().
+              th().$class("ui-state-default")._("消耗内存")._().
+              th().$class("ui-state-default")._("等待内存")._().
+              th().$class("ui-state-default")._("保留内存")._().
+              th().$class("ui-state-default")._("已用核数")._().
+              th().$class("ui-state-default")._("等待核数")._().
+              th().$class("ui-state-default")._("保留核数")._().
           _().
         _().
         tbody().$class("ui-widget-content").
@@ -136,7 +136,7 @@ public class MetricsOverviewTable extends HtmlBlock {
             td(String.valueOf(userMetrics.getAppsRunning())).
             td(
                 String.valueOf(
-                    (userMetrics.getAppsCompleted() + 
+                    (userMetrics.getAppsCompleted() +
                      userMetrics.getAppsFailed() + userMetrics.getAppsKilled())
                     )
               ).
@@ -151,20 +151,20 @@ public class MetricsOverviewTable extends HtmlBlock {
             td(String.valueOf(userMetrics.getReservedVirtualCores())).
           _().
         _()._();
-        
+
       }
     }
-    
+
     SchedulerInfo schedulerInfo=new SchedulerInfo(this.rm);
-    
-    div.h3("Scheduler Metrics").
+
+    div.h3("调度器监控").
     table("#schedulermetricsoverview").
     thead().$class("ui-widget-header").
       tr().
-        th().$class("ui-state-default")._("Scheduler Type")._().
-        th().$class("ui-state-default")._("Scheduling Resource Type")._().
-        th().$class("ui-state-default")._("Minimum Allocation")._().
-        th().$class("ui-state-default")._("Maximum Allocation")._().
+        th().$class("ui-state-default")._("调度器类型")._().
+         th().$class("ui-state-default")._("调度资源类型")._().
+         th().$class("ui-state-default")._("最小配额")._().
+         th().$class("ui-state-default")._("最大配额")._().
       _().
     _().
     tbody().$class("ui-widget-content").

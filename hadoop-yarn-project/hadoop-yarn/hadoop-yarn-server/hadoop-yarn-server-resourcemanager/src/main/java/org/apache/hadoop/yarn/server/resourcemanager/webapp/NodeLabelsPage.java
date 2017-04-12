@@ -49,13 +49,13 @@ public class NodeLabelsPage extends RmView {
       TBODY<TABLE<Hamlet>> tbody = html.table("#nodelabels").
           thead().
           tr().
-          th(".name", "Label Name").
-          th(".type", "Label Type").
-          th(".numOfActiveNMs", "Num Of Active NMs").
-          th(".totalResource", "Total Resource").
+          th(".name", "标签名称").
+          th(".type", "标签类型").
+          th(".numOfActiveNMs", "活跃节点").
+          th(".totalResource", "总资源").
           _()._().
           tbody();
-  
+
       RMNodeLabelsManager nlm = rm.getRMContext().getNodeLabelManager();
       for (RMNodeLabel info : nlm.pullRMNodeLabelsInfo()) {
         TR<TBODY<TABLE<Hamlet>>> row =
@@ -83,7 +83,7 @@ public class NodeLabelsPage extends RmView {
 
   @Override protected void preHead(Page.HTML<_> html) {
     commonPreHead(html);
-    String title = "Node labels of the cluster";
+    String title = "集群节点标签信息";
     setTitle(title);
     set(DATATABLES_ID, "nodelabels");
     setTableStyles(html, "nodelabels", ".healthStatus {width:10em}",

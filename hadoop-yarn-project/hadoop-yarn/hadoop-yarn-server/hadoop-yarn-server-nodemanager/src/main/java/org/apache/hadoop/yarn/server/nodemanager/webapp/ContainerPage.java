@@ -78,15 +78,15 @@ public class ContainerPage extends NMView implements YarnWebParams {
       }
       ContainerInfo info = new ContainerInfo(this.nmContext, container);
 
-      info("Container information")
+      info("Container 信息")
         ._("ContainerID", info.getId())
-        ._("ContainerState", info.getState())
-        ._("ExitStatus", info.getExitStatus())
+        ._("Container状态", info.getState())
+        ._("退出状态", info.getExitStatus())
         ._("Diagnostics", info.getDiagnostics())
-        ._("User", info.getUser())
-        ._("TotalMemoryNeeded", info.getMemoryNeeded())
-        ._("TotalVCoresNeeded", info.getVCoresNeeded())
-        ._("logs", info.getShortLogLink(), "Link to logs");
+        ._("用户", info.getUser())
+        ._("内存需求", info.getMemoryNeeded())
+        ._("核需求", info.getVCoresNeeded())
+        ._("日志", info.getShortLogLink(), "Link to logs");
       html._(InfoBlock.class);
     }
   }

@@ -38,7 +38,7 @@ public class NavBlock extends HtmlBlock implements YarnWebParams {
   public NavBlock(Configuration conf) {
 	 this.conf = conf;
   }
-  
+
   @Override
   protected void render(Block html) {
 
@@ -50,32 +50,32 @@ public class NavBlock extends HtmlBlock implements YarnWebParams {
         addErrorsAndWarningsLink = true;
       }
     }
-	
+
     String RMWebAppURL =
         WebAppUtils.getResolvedRMWebAppURLWithScheme(this.conf);
 	  Hamlet.UL<Hamlet.DIV<Hamlet>> ul = html
       .div("#nav")
-      .h3()._("ResourceManager")._()
+      .h3()._("资源管理器")._()
         .ul()
-          .li().a(RMWebAppURL, "RM Home")._()._()
-      .h3()._("NodeManager")._() // TODO: Problem if no header like this
+          .li().a(RMWebAppURL, "主页")._()._()
+      .h3()._("节点管理器")._() // TODO: Problem if no header like this
         .ul()
           .li()
-            .a(url("node"), "Node Information")._()
+            .a(url("node"), "节点信息")._()
           .li()
-            .a(url("allApplications"), "List of Applications")
+            .a(url("allApplications"), "应用列表")
             ._()
           .li()
-            .a(url("allContainers"), "List of Containers")._()
+            .a(url("allContainers"), "Containers列表")._()
         ._()
       .h3("Tools")
         .ul()
-          .li().a("/conf", "Configuration")._()
-          .li().a("/logs", "Local logs")._()
-          .li().a("/stacks", "Server stacks")._()
-          .li().a("/jmx?qry=Hadoop:*", "Server metrics")._();
+        .li().a("/conf", "配置")._()
+        .li().a("/logs", "本地日志")._()
+        .li().a("/stacks", "服务器 stacks")._()
+        .li().a("/jmx?qry=Hadoop:*", "服务器监控")._();
     if (addErrorsAndWarningsLink) {
-      ul.li().a(url("errors-and-warnings"), "Errors/Warnings")._();
+      ul.li().a(url("errors-and-warnings"), "错误及警告")._();
     }
     ul._()._();
   }

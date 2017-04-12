@@ -32,11 +32,11 @@
   </div>
 
   <ul class="nav navbar-nav" id="ui-tabs">
-    <li><a href="#tab-overview">Overview</a></li>
+    <li><a href="#tab-overview">总览</a></li>
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilities <b class="caret"></b></a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">工具 <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a href="logs">Logs</a></li>
+        <li><a href="logs">日志</a></li>
       </ul>
     </li>
   </ul>
@@ -58,7 +58,7 @@
 
 <div class="row">
   <hr />
-  <div class="col-xs-2"><p>Hadoop, {release-year-token}.</p></div>
+  <div class="col-xs-2"><p>Hadoop, 2016.</p></div>
 </div>
 </div>
 
@@ -66,8 +66,8 @@
 {#dn}
 <div class="page-header"><h1>DataNode on <small>{HostName}:{DataPort}</small></h1></div>
 <table class="table table-bordered table-striped">
-  <tr><th>Cluster ID:</th><td>{ClusterId}</td></tr>
-  <tr><th>Version:</th><td>{Version}</td></tr>
+  <tr><th>集群 ID:</th><td>{ClusterId}</td></tr>
+  <tr><th>版本:</th><td>{Version}</td></tr>
 </table>
 {/dn}
 
@@ -75,11 +75,11 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Namenode Address</th>
+      <th>Namenode 地址</th>
       <th>Block Pool ID</th>
-      <th>Actor State</th>
-      <th>Last Heartbeat</th>
-      <th>Last Block Report</th>
+      <th>执行器状态</th>
+      <th>最近心跳</th>
+      <th>最近 Block 报告</th>
     </tr>
   </thead>
   {#dn.BPServiceActorInfo}
@@ -93,15 +93,15 @@
   {/dn.BPServiceActorInfo}
 </table>
 
-<div class="page-header"><h1>Volume Information</h1></div>
+<div class="page-header"><h1>卷信息</h1></div>
 <table class="table">
   <thead>
     <tr>
-      <th>Directory</th>
-      <th>Capacity Used</th>
-      <th>Capacity Left</th>
-      <th>Capacity Reserved</th>
-      <th>Reserved Space for Replicas</th>
+      <th>文件夹</th>
+      <th>使用容量</th>
+      <th>剩余容量</th>
+      <th>预留容量</th>
+      <th>复制预留空间</th>
       <th>Blocks</th>
     </tr>
   </thead>

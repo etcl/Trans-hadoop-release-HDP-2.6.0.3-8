@@ -101,7 +101,7 @@ class CapacitySchedulerPage extends RmView {
       // first display the queue's label specific details :
       ResponseInfo ri =
           info("\'" + lqinfo.getQueuePath().substring(5)
-              + "\' Queue Status for Partition \'" + nodeLabelDisplay + "\'");
+              + "\' Partition队列状态 \'" + nodeLabelDisplay + "\'");
       renderQueueCapacityInfo(ri, nodeLabel);
       html._(InfoBlock.class);
       // clear the info contents so this queue's info doesn't accumulate into
@@ -110,7 +110,7 @@ class CapacitySchedulerPage extends RmView {
 
       // second display the queue specific details :
       ri =
-          info("\'" + lqinfo.getQueuePath().substring(5) + "\' Queue Status")
+          info("\'" + lqinfo.getQueuePath().substring(5) + "\' 队列状态")
               ._("Queue State:", lqinfo.getQueueState());
       renderCommonLeafQueueInfo(ri);
 
@@ -122,8 +122,8 @@ class CapacitySchedulerPage extends RmView {
 
     private void renderLeafQueueInfoWithoutParition(Block html) {
       ResponseInfo ri =
-          info("\'" + lqinfo.getQueuePath().substring(5) + "\' Queue Status")
-              ._("Queue State:", lqinfo.getQueueState());
+          info("\'" + lqinfo.getQueuePath().substring(5) + "\' 队列状态")
+              ._("队列状态:", lqinfo.getQueueState());
       renderQueueCapacityInfo(ri, "");
       renderCommonLeafQueueInfo(ri);
       html._(InfoBlock.class);
@@ -153,37 +153,37 @@ class CapacitySchedulerPage extends RmView {
           ? new ResourceInfo(Resources.none())
           : resourceUsages.getAmUsed();
       ri.
-      _("Used Capacity:", percent(capacities.getUsedCapacity() / 100)).
-      _("Configured Capacity:", percent(capacities.getCapacity() / 100)).
-      _("Configured Max Capacity:", percent(capacities.getMaxCapacity() / 100)).
-      _("Absolute Used Capacity:", percent(capacities.getAbsoluteUsedCapacity() / 100)).
-      _("Absolute Configured Capacity:", percent(capacities.getAbsoluteCapacity() / 100)).
-      _("Absolute Configured Max Capacity:", percent(capacities.getAbsoluteMaxCapacity() / 100)).
-      _("Used Resources:", resourceUsages.getUsed().toString()).
-      _("Configured Max Application Master Limit:", StringUtils.format("%.1f",
+      _("已使用容量:", percent(capacities.getUsedCapacity() / 100)).
+      _("配置容量:", percent(capacities.getCapacity() / 100)).
+      _("配置最大容量:", percent(capacities.getMaxCapacity() / 100)).
+      _("完全使用容量:", percent(capacities.getAbsoluteUsedCapacity() / 100)).
+      _("完全配置容量:", percent(capacities.getAbsoluteCapacity() / 100)).
+      _("完全配置最大容量:", percent(capacities.getAbsoluteMaxCapacity() / 100)).
+      _("已使用资源:", resourceUsages.getUsed().toString()).
+      _("配置最大 Master 限制:", StringUtils.format("%.1f",
           capacities.getMaxAMLimitPercentage())).
-      _("Max Application Master Resources:",
+      _("最大Master资源:",
           resourceUsages.getAMLimit().toString()).
-      _("Used Application Master Resources:",
+      _("已使用Master资源:",
           amUsed.toString()).
-      _("Max Application Master Resources Per User:",
+      _("单用户最大Master资源:",
           userAMResourceLimit.toString());
     }
 
     private void renderCommonLeafQueueInfo(ResponseInfo ri) {
       ri.
-      _("Num Schedulable Applications:", Integer.toString(lqinfo.getNumActiveApplications())).
-      _("Num Non-Schedulable Applications:", Integer.toString(lqinfo.getNumPendingApplications())).
-      _("Num Containers:", Integer.toString(lqinfo.getNumContainers())).
-      _("Max Applications:", Integer.toString(lqinfo.getMaxApplications())).
-      _("Max Applications Per User:", Integer.toString(lqinfo.getMaxApplicationsPerUser())).
-      _("Configured Minimum User Limit Percent:", Integer.toString(lqinfo.getUserLimit()) + "%").
-      _("Configured User Limit Factor:", StringUtils.format(
+      _("可调度应用:", Integer.toString(lqinfo.getNumActiveApplications())).
+      _("非可调度应用:", Integer.toString(lqinfo.getNumPendingApplications())).
+      _("Containers数量:", Integer.toString(lqinfo.getNumContainers())).
+      _("最大 Applications:", Integer.toString(lqinfo.getMaxApplications())).
+      _("单用户最大 Applications:", Integer.toString(lqinfo.getMaxApplicationsPerUser())).
+      _("配置最小用户限制:", Integer.toString(lqinfo.getUserLimit()) + "%").
+      _("配置用户限制 Factor:", StringUtils.format(
           "%.3f", lqinfo.getUserLimitFactor()).replaceAll("\\.?0*$", "")).
-      _("Accessible Node Labels:", StringUtils.join(",", lqinfo.getNodeLabels())).
-      _("Ordering Policy: ", lqinfo.getOrderingPolicyInfo()).
-      _("Preemption:", lqinfo.getPreemptionDisabled() ? "disabled" : "enabled").
-      _("Default Node Label Expression:",
+      _("节点标签:", StringUtils.join(",", lqinfo.getNodeLabels())).
+      _("排序策略: ", lqinfo.getOrderingPolicyInfo()).
+      _("优先设置:", lqinfo.getPreemptionDisabled() ? "disabled" : "enabled").
+      _("默认节点标签:",
               lqinfo.getDefaultNodeLabelExpression() == null
                   ? NodeLabel.DEFAULT_NODE_LABEL_PARTITION
                   : lqinfo.getDefaultNodeLabelExpression());
@@ -205,13 +205,13 @@ class CapacitySchedulerPage extends RmView {
     protected void render(Block html) {
       TBODY<TABLE<Hamlet>> tbody =
           html.table("#userinfo").thead().$class("ui-widget-header").tr().th()
-              .$class("ui-state-default")._("User Name")._().th()
-              .$class("ui-state-default")._("Max Resource")._().th()
-              .$class("ui-state-default")._("Used Resource")._().th()
-              .$class("ui-state-default")._("Max AM Resource")._().th()
-              .$class("ui-state-default")._("Used AM Resource")._().th()
-              .$class("ui-state-default")._("Schedulable Apps")._().th()
-              .$class("ui-state-default")._("Non-Schedulable Apps")._()._()._()
+              .$class("ui-state-default")._("用户名")._().th()
+              .$class("ui-state-default")._("最大资源")._().th()
+              .$class("ui-state-default")._("已使用资源")._().th()
+              .$class("ui-state-default")._("最大 AM 资源")._().th()
+              .$class("ui-state-default")._("已使用 AM 资源")._().th()
+              .$class("ui-state-default")._("可调度应用")._().th()
+              .$class("ui-state-default")._("非可调度应用")._()._()._()
               .tbody();
 
       ArrayList<UserInfo> users = lqinfo.getUsers().getUsersList();
@@ -236,7 +236,7 @@ class CapacitySchedulerPage extends RmView {
             .td(Integer.toString(userInfo.getNumPendingApplications()))._();
       }
 
-      html.div().$class("usersinfo").h5("Active Users Info")._();
+      html.div().$class("usersinfo").h5("活跃用户信息")._();
       tbody._()._();
     }
   }
@@ -340,9 +340,9 @@ class CapacitySchedulerPage extends RmView {
           .$style(
               "border-style: solid; border-color: #000000; border-width: 1px;"
                   + " cursor: hand; cursor: pointer; border-radius: 4px")
-          .$onclick("confirmAction()").b("Dump scheduler logs")._().select()
-          .$id("time").option().$value("60")._("1 min")._().option()
-          .$value("300")._("5 min")._().option().$value("600")._("10 min")._()
+              .$onclick("confirmAction()").b("生成调度器日志")._().select()
+              .$id("time").option().$value("60")._("1 分钟")._().option()
+              .$value("300")._("5 分钟")._().option().$value("600")._("10 分钟")._()
           ._()._();
 
         StringBuilder script = new StringBuilder();
@@ -376,7 +376,7 @@ class CapacitySchedulerPage extends RmView {
       UL<DIV<DIV<Hamlet>>> ul = html.
         div("#cs-wrapper.ui-widget").
           div(".ui-widget-header.ui-corner-top").
-            _("Application Queues")._().
+            _("队列信息")._().
           div("#cs.ui-widget-content.ui-corner-bottom").
             ul();
       if (cs == null) {
@@ -388,15 +388,15 @@ class CapacitySchedulerPage extends RmView {
       } else {
         ul.
           li().$style("margin-bottom: 1em").
-            span().$style("font-weight: bold")._("Legend:")._().
+            span().$style("font-weight: bold")._("图例:")._().
             span().$class("qlegend ui-corner-all").$style(Q_GIVEN).
-              _("Capacity")._().
+              _("容量")._().
             span().$class("qlegend ui-corner-all").$style(Q_UNDER).
-              _("Used")._().
+              _("已使用")._().
             span().$class("qlegend ui-corner-all").$style(Q_OVER).
-              _("Used (over capacity)")._().
+              _("已使用（超过容量）")._().
             span().$class("qlegend ui-corner-all ui-state-default").
-              _("Max Capacity")._().
+              _("最大容量")._().
           _();
 
         float used = 0;
@@ -483,7 +483,7 @@ class CapacitySchedulerPage extends RmView {
     public void render(HtmlBlock.Block html) {
       SchedulerHealth healthInfo = cs.getSchedulerHealth();
       DIV<Hamlet> div = html.div("#health");
-      div.h4("Aggregate scheduler counts");
+      div.h4("调度器汇总");
       TBODY<TABLE<DIV<Hamlet>>> tbody =
           div.table("#lastrun").thead().$class("ui-widget-header").tr().th()
             .$class("ui-state-default")._("Total Container Allocations(count)")
@@ -507,10 +507,10 @@ class CapacitySchedulerPage extends RmView {
       div.h4("Last scheduler run");
       tbody =
           div.table("#lastrun").thead().$class("ui-widget-header").tr().th()
-            .$class("ui-state-default")._("Time")._().th()
-            .$class("ui-state-default")._("Allocations(count - resources)")._()
-            .th().$class("ui-state-default")._("Reservations(count - resources)")
-            ._().th().$class("ui-state-default")._("Releases(count - resources)")
+            .$class("ui-state-default")._("时间")._().th()
+            .$class("ui-state-default")._("分配（数量-资源）")._()
+            .th().$class("ui-state-default")._("保留（数量-资源）")
+            ._().th().$class("ui-state-default")._("释放（数量-资源）")
             ._()._()._().tbody();
       tbody
         .$class("ui-widget-content")
@@ -526,10 +526,10 @@ class CapacitySchedulerPage extends RmView {
           healthInfo.getReleaseCount().toString() + " - "
               + healthInfo.getResourcesReleased().toString())._()._()._();
       Map<String, SchedulerHealth.DetailedInformation> info = new HashMap<>();
-      info.put("Allocation", healthInfo.getLastAllocationDetails());
-      info.put("Reservation", healthInfo.getLastReservationDetails());
-      info.put("Release", healthInfo.getLastReleaseDetails());
-      info.put("Preemption", healthInfo.getLastPreemptionDetails());
+      info.put("分配信息", healthInfo.getLastAllocationDetails());
+      info.put("保留信息", healthInfo.getLastReservationDetails());
+      info.put("释放信息", healthInfo.getLastReleaseDetails());
+      info.put("优先信息", healthInfo.getLastPreemptionDetails());
 
       for (Map.Entry<String, SchedulerHealth.DetailedInformation> entry : info
         .entrySet()) {
@@ -537,13 +537,13 @@ class CapacitySchedulerPage extends RmView {
         String nodeId = "N/A";
         String queue = "N/A";
         String table = "#" + entry.getKey();
-        div.h4("Last " + entry.getKey());
+        div.h4("最新 " + entry.getKey());
         tbody =
             div.table(table).thead().$class("ui-widget-header").tr().th()
-              .$class("ui-state-default")._("Time")._().th()
+              .$class("ui-state-default")._("时间")._().th()
               .$class("ui-state-default")._("Container Id")._().th()
-              .$class("ui-state-default")._("Node Id")._().th()
-              .$class("ui-state-default")._("Queue")._()._()._().tbody();
+              .$class("ui-state-default")._("节点 Id")._().th()
+              .$class("ui-state-default")._("队列")._()._()._().tbody();
         SchedulerHealth.DetailedInformation di = entry.getValue();
         if (di.getTimestamp() != 0) {
           containerId = di.getContainerId().toString();

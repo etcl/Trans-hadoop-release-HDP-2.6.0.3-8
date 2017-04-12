@@ -146,7 +146,7 @@ public class RMAppAttemptBlock extends AppAttemptBlock{
     if (attempt != null) {
       attemptMetrics = attempt.getRMAppAttemptMetrics();
     }
-    
+
     if (attemptMetrics == null) {
       return;
     }
@@ -154,7 +154,7 @@ public class RMAppAttemptBlock extends AppAttemptBlock{
     DIV<Hamlet> div = html.div(_INFO_WRAP);
     TABLE<DIV<Hamlet>> table =
         div.h3(
-          "Total Allocated Containers: "
+          "已分配Containers: "
               + attemptMetrics.getTotalAllocatedContainers()).h3("Each table cell"
             + " represents the number of NodeLocal/RackLocal/OffSwitch containers"
             + " satisfied by NodeLocal/RackLocal/OffSwitch resource requests.").table(
@@ -162,9 +162,9 @@ public class RMAppAttemptBlock extends AppAttemptBlock{
     table.
       tr().
         th(_TH, "").
-        th(_TH, "Node Local Request").
-        th(_TH, "Rack Local Request").
-        th(_TH, "Off Switch Request").
+        th(_TH, "节点本地请求").
+        th(_TH, "Rack本地请求").
+        th(_TH, "关闭请求").
       _();
 
     String[] containersType =
@@ -195,9 +195,9 @@ public class RMAppAttemptBlock extends AppAttemptBlock{
           .valueOf(attempt.getAppAttemptState().toString()))) {
         RMAppAttemptMetrics metrics = attempt.getRMAppAttemptMetrics();
         DIV<Hamlet> pdiv = html._(InfoBlock.class).div(_INFO_WRAP);
-        info("Application Attempt Overview").clear();
-        info("Application Attempt Metrics")._(
-          "Application Attempt Headroom : ", metrics == null ? "N/A" :
+        info("应用尝试总览").clear();
+        info("应用尝试监控")._(
+          "应用尝试资源余量 : ", metrics == null ? "N/A" :
             metrics.getApplicationAttemptHeadroom());
         pdiv._();
       }
@@ -208,7 +208,7 @@ public class RMAppAttemptBlock extends AppAttemptBlock{
     ApplicationId appId = this.appAttemptId.getApplicationId();
     RMAppAttempt attempt = null;
     RMApp rmApp = rm.getRMContext().getRMApps().get(appId);
-    if (rmApp != null) { 
+    if (rmApp != null) {
       attempt = rmApp.getAppAttempts().get(appAttemptId);
     }
     return attempt;
@@ -227,13 +227,13 @@ public class RMAppAttemptBlock extends AppAttemptBlock{
       }
     }
 
-    info("Application Attempt Overview")
+    info("应用尝试总览")
       ._(
-        "Application Attempt State:",
+        "应用尝试状态:",
         appAttempt.getAppAttemptState() == null ? UNAVAILABLE : appAttempt
           .getAppAttemptState())
-        ._("Started:", Times.format(appAttempt.getStartedTime()))
-        ._("Elapsed:",
+        ._("开始时间:", Times.format(appAttempt.getStartedTime()))
+        ._("消耗时间:",
             org.apache.hadoop.util.StringUtils.formatTime(Times.elapsed(
                 appAttempt.getStartedTime(), appAttempt.getFinishedTime())))
       ._(
@@ -243,9 +243,9 @@ public class RMAppAttemptBlock extends AppAttemptBlock{
             ? null : root_url("container", appAttempt.getAmContainerId()),
         appAttempt.getAmContainerId() == null ? "N/A" :
           String.valueOf(appAttempt.getAmContainerId()))
-      ._("Node:", node)
+      ._("节点:", node)
       ._(
-        "Tracking URL:",
+        "运行图:",
         appAttempt.getTrackingUrl() == null
             || appAttempt.getTrackingUrl().equals(UNAVAILABLE) ? null
             : root_url(appAttempt.getTrackingUrl()),
@@ -257,9 +257,9 @@ public class RMAppAttemptBlock extends AppAttemptBlock{
                 || appAttempt.getAppAttemptState() == YarnApplicationAttemptState.KILLED
                 ? "History" : "ApplicationMaster")
       ._(
-        "Diagnostics Info:",
+        "诊断信息:",
         appAttempt.getDiagnosticsInfo() == null ? "" : appAttempt
-          .getDiagnosticsInfo())._("Blacklisted Nodes:", blacklistedNodes);
+          .getDiagnosticsInfo())._("已失效节点:", blacklistedNodes);
   }
 
   public static Set<String> getBlacklistedNodes(ResourceManager rm,

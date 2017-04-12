@@ -98,31 +98,31 @@ public class ContainerBlock extends HtmlBlock {
     ContainerInfo container = new ContainerInfo(containerReport);
     setTitle(join("Container ", containerid));
 
-    info("Container Overview")
+    info("Container总览")
       ._(
-        "Container State:",
+        "Container 状态:",
         container.getContainerState() == null ? UNAVAILABLE : container
           .getContainerState())
-      ._("Exit Status:", container.getContainerExitStatus())
+      ._("退出状态:", container.getContainerExitStatus())
       ._(
-        "Node:",
+        "节点:",
         container.getNodeHttpAddress() == null ? "#" : container
           .getNodeHttpAddress(),
         container.getNodeHttpAddress() == null ? "N/A" : container
           .getNodeHttpAddress())
-      ._("Priority:", container.getPriority())
-      ._("Started:", Times.format(container.getStartedTime()))
+      ._("优先级:", container.getPriority())
+      ._("开始时间:", Times.format(container.getStartedTime()))
       ._(
-        "Elapsed:",
+        "消耗时间:",
         StringUtils.formatTime(Times.elapsed(container.getStartedTime(),
           container.getFinishedTime())))
       ._(
-        "Resource:",
+        "资源:",
         container.getAllocatedMB() + " Memory, "
             + container.getAllocatedVCores() + " VCores")
-      ._("Logs:", container.getLogUrl() == null ? "#" : container.getLogUrl(),
+      ._("日志:", container.getLogUrl() == null ? "#" : container.getLogUrl(),
           container.getLogUrl() == null ? "N/A" : "Logs")
-      ._("Diagnostics:", container.getDiagnosticsInfo() == null ?
+      ._("诊断信息:", container.getDiagnosticsInfo() == null ?
           "" : container.getDiagnosticsInfo());
 
     html._(InfoBlock.class);

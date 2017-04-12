@@ -125,7 +125,7 @@ public class AppBlock extends HtmlBlock {
 
     AppInfo app = new AppInfo(appReport);
 
-    setTitle(join("Application ", aid));
+    setTitle(join("应用ID ", aid));
 
     if (webUiType != null
         && webUiType.equals(YarnWebParams.RM_WEB_UI)
@@ -134,7 +134,7 @@ public class AppBlock extends HtmlBlock {
       // Application Kill
       html.div()
         .button()
-          .$onclick("confirmAction()").b("Kill Application")._()
+          .$onclick("confirmAction()").b("终止应用")._()
           ._();
 
       StringBuilder script = new StringBuilder();
@@ -164,27 +164,27 @@ public class AppBlock extends HtmlBlock {
     String schedulerPath = WebAppUtils.getResolvedRMWebAppURLWithScheme(conf) +
         "/cluster/scheduler?openQueues=" + app.getQueue();
 
-    ResponseInfo overviewTable = info("Application Overview")
-      ._("User:", schedulerPath, app.getUser())
-      ._("Name:", app.getName())
-      ._("Application Type:", app.getType())
-      ._("Application Tags:",
+    ResponseInfo overviewTable = info("应用总览")
+          ._("用户:", schedulerPath, app.getUser())
+          ._("应用名称:", app.getName())
+          ._("应用类型:", app.getType())
+          ._("应用标签:",
         app.getApplicationTags() == null ? "" : app.getApplicationTags())
-      ._("Application Priority:", clarifyAppPriority(app.getPriority()))
+      ._("应用优先级:", clarifyAppPriority(app.getPriority()))
       ._(
-        "YarnApplicationState:",
+        "应用状态:",
         app.getAppState() == null ? UNAVAILABLE : clarifyAppState(app
           .getAppState()))
-      ._("Queue:", schedulerPath, app.getQueue())
-      ._("FinalStatus Reported by AM:",
+      ._("队列:", schedulerPath, app.getQueue())
+      ._("最终状态:",
         clairfyAppFinalStatus(app.getFinalAppStatus()))
-      ._("Started:", Times.format(app.getStartedTime()))
+      ._("开始时间:", Times.format(app.getStartedTime()))
       ._(
-        "Elapsed:",
+        "消耗时间:",
         StringUtils.formatTime(Times.elapsed(app.getStartedTime(),
           app.getFinishedTime())))
       ._(
-        "Tracking URL:",
+        "运行图:",
         app.getTrackingUrl() == null
             || app.getTrackingUrl().equals(UNAVAILABLE) ? null : root_url(app
           .getTrackingUrl()),
@@ -198,20 +198,20 @@ public class AppBlock extends HtmlBlock {
         && webUiType.equals(YarnWebParams.RM_WEB_UI)) {
       LogAggregationStatus status = getLogAggregationStatus();
       if (status == null) {
-        overviewTable._("Log Aggregation Status", "N/A");
+        overviewTable._("日志汇总状态", "N/A");
       } else if (status == LogAggregationStatus.DISABLED
           || status == LogAggregationStatus.NOT_START
           || status == LogAggregationStatus.SUCCEEDED) {
-        overviewTable._("Log Aggregation Status", status.name());
+        overviewTable._("日志汇总状态", status.name());
       } else {
-        overviewTable._("Log Aggregation Status",
+        overviewTable._("日志汇总状态",
             root_url("logaggregationstatus", app.getAppId()), status.name());
       }
     }
-    overviewTable._("Diagnostics:",
+    overviewTable._("诊断信息:",
         app.getDiagnosticsInfo() == null ? "" : app.getDiagnosticsInfo());
-    overviewTable._("Unmanaged Application:", app.isUnmanagedApp());
-    overviewTable._("Application Node Label expression:",
+    overviewTable._("非托管标识:", app.isUnmanagedApp());
+    overviewTable._("应用节点标签:",
         app.getAppNodeLabelExpression() == null ? "<Not set>"
             : app.getAppNodeLabelExpression());
     overviewTable._("AM container Node Label expression:",

@@ -40,17 +40,17 @@ public class AboutBlock extends HtmlBlock {
     html._(MetricsOverviewTable.class);
     ResourceManager rm = getInstance(ResourceManager.class);
     ClusterInfo cinfo = new ClusterInfo(rm);
-    info("Cluster overview").
-      _("Cluster ID:", cinfo.getClusterId()).
-      _("ResourceManager state:", cinfo.getState()).
-      _("ResourceManager HA state:", cinfo.getHAState()).
-      _("ResourceManager HA zookeeper connection state:",
+    info("集群总览").
+      _("集群 ID:", cinfo.getClusterId()).
+      _("资源管理器状态:", cinfo.getState()).
+      _("资源管理器HA 状态:", cinfo.getHAState()).
+      _("资源管理器HA zookeeper连接状态:",
           cinfo.getHAZookeeperConnectionState()).
-      _("ResourceManager RMStateStore:", cinfo.getRMStateStore()).
-      _("ResourceManager started on:", Times.format(cinfo.getStartedOn())).
-      _("ResourceManager version:", cinfo.getRMBuildVersion() +
+          _("资源管理器 RMStateStore:", cinfo.getRMStateStore()).
+          _("资源管理器启动时间:", Times.format(cinfo.getStartedOn())).
+          _("资源管理器版本:", cinfo.getRMBuildVersion() +
           " on " + cinfo.getRMVersionBuiltOn()).
-      _("Hadoop version:", cinfo.getHadoopBuildVersion() +
+      _("Hadoop版本:", cinfo.getHadoopBuildVersion() +
           " on " + cinfo.getHadoopVersionBuiltOn());
     html._(InfoBlock.class);
   }

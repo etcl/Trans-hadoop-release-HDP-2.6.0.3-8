@@ -22,7 +22,7 @@
 <link rel="stylesheet" type="text/css" href="/static/bootstrap-3.0.2/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/static/dataTables.bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="/static/hadoop.css" />
-<title>Namenode information</title>
+<title>Namenode 信息</title>
 </head>
 <body>
 
@@ -33,16 +33,16 @@
   </div>
 
   <ul class="nav navbar-nav" id="ui-tabs">
-    <li><a href="#tab-overview">Overview</a></li>
-    <li><a href="#tab-datanode">Datanodes</a></li>
-    <li><a href="#tab-datanode-volume-failures">Datanode Volume Failures</a></li>
-    <li><a href="#tab-snapshot">Snapshot</a></li>
-    <li><a href="#tab-startup-progress">Startup Progress</a></li>
+    <li><a href="#tab-overview">总览</a></li>
+    <li><a href="#tab-datanode">Namenode</a></li>
+    <li><a href="#tab-datanode-volume-failures">节点卷故障</a></li>
+    <li><a href="#tab-snapshot">快照</a></li>
+    <li><a href="#tab-startup-progress">启动进程</a></li>
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilities <b class="caret"></b></a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">工具 <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a href="explorer.html">Browse the file system</a></li>
-        <li><a href="logs">Logs</a></li>
+        <li><a href="explorer.html">文件浏览</a></li>
+        <li><a href="logs">日志查看</a></li>
       </ul>
     </li>
   </ul>
@@ -68,7 +68,7 @@
 
 <div class="row">
   <hr />
-  <div class="col-xs-2"><p>Hadoop, {release-year-token}.</p></div>
+  <div class="col-xs-2"><p>Hadoop, 2016.</p></div>
 </div>
 </div>
 
@@ -124,74 +124,74 @@
 {/eq}
 {/nn}
 
-<div class="page-header"><h1>Overview {#nnstat}<small>'{HostAndPort}' ({State})</small>{/nnstat}</h1></div>
+<div class="page-header"><h1>总览 {#nnstat}<small>'{HostAndPort}' ({State})</small>{/nnstat}</h1></div>
 
 <table class="table table-bordered table-striped">
 {#HAInfo}
-  <tr><th>Namespace:</th><td>{Namespace}</td></tr>
+  <tr><th>命名空间:</th><td>{Namespace}</td></tr>
   <tr><th>Namenode ID:</th><td>{NamenodeID}</td></tr>
 {/HAInfo}
 {#nn}
-  <tr><th>Started:</th><td>{NNStarted}</td></tr>
-  <tr><th>Version:</th><td>{Version}</td></tr>
-  <tr><th>Compiled:</th><td>{CompileInfo}</td></tr>
-  <tr><th>Cluster ID:</th><td>{ClusterId}</td></tr>
+  <tr><th>启动时间:</th><td>{NNStarted}</td></tr>
+  <tr><th>版本:</th><td>{Version}</td></tr>
+  <tr><th>编译时间:</th><td>{CompileInfo}</td></tr>
+  <tr><th>集群 ID:</th><td>{ClusterId}</td></tr>
   <tr><th>Block Pool ID:</th><td>{BlockPoolId}</td></tr>
 {/nn}
 </table>
 
-<div class="page-header"><h1>Summary</h1></div>
+<div class="page-header"><h1>摘要</h1></div>
 <p>
-  Security is {#nnstat}{#SecurityEnabled}on{:else}off{/SecurityEnabled}{/nnstat}.</p>
-<p>{#nn}{#Safemode}{.}{:else}Safemode is off.{/Safemode}{/nn}</p>
+  安全性 已 {#nnstat}{#SecurityEnabled}开启{:else}关闭{/SecurityEnabled}{/nnstat}.</p>
+<p>{#nn}{#Safemode}{.}{:else}安全模式 已 关闭.{/Safemode}{/nn}</p>
 
 <p>
   {#fs}
-  {FilesTotal} files and directories, {BlocksTotal} blocks = {@math key="{FilesTotal}" method="add" operand="{BlocksTotal}"/} total filesystem object(s).
+  {FilesTotal} 文件及文件夹, {BlocksTotal} blocks = {@math key="{FilesTotal}" method="add" operand="{BlocksTotal}"/} total filesystem object(s).
   {#helper_fs_max_objects/}
   {/fs}
 </p>
 {#mem.HeapMemoryUsage}
-<p>Heap Memory used {used|fmt_bytes} of {committed|fmt_bytes} Heap Memory. Max Heap Memory is {@eq key=max value="-1" type="number"}&ltunbonded&gt{:else}{max|fmt_bytes}{/eq}.</p>
+<p>堆内存已使用 {used|fmt_bytes} 共 {committed|fmt_bytes} . 最大堆内存为 {@eq key=max value="-1" type="number"}&ltunbonded&gt{:else}{max|fmt_bytes}{/eq}.</p>
 {/mem.HeapMemoryUsage}
 
 {#mem.NonHeapMemoryUsage}
-<p>Non Heap Memory used {used|fmt_bytes} of {committed|fmt_bytes} Commited Non Heap Memory. Max Non Heap Memory is {@eq key=max value="-1" type="number"}&ltunbonded&gt{:else}{max|fmt_bytes}{/eq}.</p>
+<p>非堆内存已使用 {used|fmt_bytes} 共 {committed|fmt_bytes} . 最大非堆内存 {@eq key=max value="-1" type="number"}&ltunbonded&gt{:else}{max|fmt_bytes}{/eq}.</p>
 {/mem.NonHeapMemoryUsage}
 
 {#nn}
 <table class="table table-bordered table-striped">
-  <tr><th> Configured Capacity:</th><td>{Total|fmt_bytes}</td></tr>
-  <tr><th> DFS Used:</th><td>{Used|fmt_bytes} ({PercentUsed|fmt_percentage})</td></tr>
-  <tr><th> Non DFS Used:</th><td>{NonDfsUsedSpace|fmt_bytes}</td></tr>
-  <tr><th> DFS Remaining:</th><td>{Free|fmt_bytes} ({PercentRemaining|fmt_percentage})</td></tr>
-  <tr><th> Block Pool Used:</th><td>{BlockPoolUsedSpace|fmt_bytes} ({PercentBlockPoolUsed|fmt_percentage})</td></tr>
-  <tr><th> DataNodes usages% (Min/Median/Max/stdDev): </th>
+<tr><th> 已配置容量:</th><td>{Total|fmt_bytes}</td></tr>
+<tr><th> DFS 已使用:</th><td>{Used|fmt_bytes} ({PercentUsed|fmt_percentage})</td></tr>
+<tr><th> 非 DFS 已使用:</th><td>{NonDfsUsedSpace|fmt_bytes}</td></tr>
+<tr><th> DFS 剩余:</th><td>{Free|fmt_bytes} ({PercentRemaining|fmt_percentage})</td></tr>
+<tr><th> Block Pool已使用:</th><td>{BlockPoolUsedSpace|fmt_bytes} ({PercentBlockPoolUsed|fmt_percentage})</td></tr>
+<tr><th> Namenode利用率% (最小/中位/最大/stdDev): </th>
 	<td>{#NodeUsage.nodeUsage}{min} / {median} / {max} / {stdDev}{/NodeUsage.nodeUsage}</td></tr>
 {/nn}
 
 {#fs}
-  <tr><th><a href="#tab-datanode">Live Nodes</a></th><td>{NumLiveDataNodes} (Decommissioned: {NumDecomLiveDataNodes})</td></tr>
-  <tr><th><a href="#tab-datanode">Dead Nodes</a></th><td>{NumDeadDataNodes} (Decommissioned: {NumDecomDeadDataNodes})</td></tr>
-  <tr><th><a href="#tab-datanode">Decommissioning Nodes</a></th><td>{NumDecommissioningDataNodes}</td></tr>
-  <tr><th><a href="#tab-datanode-volume-failures">Total Datanode Volume Failures</a></th><td>{VolumeFailuresTotal} ({EstimatedCapacityLostTotal|fmt_bytes})</td></tr>
+  <tr><th><a href="#tab-datanode">活跃节点</a></th><td>{NumLiveDataNodes} (Decommissioned: {NumDecomLiveDataNodes})</td></tr>
+  <tr><th><a href="#tab-datanode">已挂节点</a></th><td>{NumDeadDataNodes} (Decommissioned: {NumDecomDeadDataNodes})</td></tr>
+  <tr><th><a href="#tab-datanode">停用节点</a></th><td>{NumDecommissioningDataNodes}</td></tr>
+  <tr><th><a href="#tab-datanode-volume-failures">总节点卷故障</a></th><td>{VolumeFailuresTotal} ({EstimatedCapacityLostTotal|fmt_bytes})</td></tr>
   {@eq key=nnstat.State value="active"}
-    <tr><th title="Excludes missing blocks.">Number of Under-Replicated Blocks</th><td>{UnderReplicatedBlocks}</td></tr>
-    <tr><th>Number of Blocks Pending Deletion</th><td>{PendingDeletionBlocks}</td></tr>
+    <tr><th title="Excludes missing blocks.">待复制 Block</th><td>{UnderReplicatedBlocks}</td></tr>
+    <tr><th>待删除 Block</th><td>{PendingDeletionBlocks}</td></tr>
   {/eq}
-  <tr><th>Block Deletion Start Time</th><td>{BlockDeletionStartTime|date_tostring}</td></tr>
+  <tr><th>删除Block启动时间</th><td>{BlockDeletionStartTime|date_tostring}</td></tr>
 {/fs}
 
 {#fsn}
-  <tr><th>Last Checkpoint Time</th><td>{@if cond="{LastCheckpointTime} === 0"}Never{:else}{LastCheckpointTime|date_tostring}{/if}</td></tr>
+  <tr><th>最近 Checkpoint 时间</th><td>{@if cond="{LastCheckpointTime} === 0"}Never{:else}{LastCheckpointTime|date_tostring}{/if}</td></tr>
 {/fsn}
 </table>
 
-<div class="page-header"><h1>NameNode Journal Status</h1></div>
-<p><b>Current transaction ID:</b> {nn.JournalTransactionInfo.LastAppliedOrWrittenTxId}</p>
+<div class="page-header"><h1>NameNode 日志状态</h1></div>
+<p><b>当前事务 ID:</b> {nn.JournalTransactionInfo.LastAppliedOrWrittenTxId}</p>
 <table class="table" title="NameNode Journals">
   <thead>
-	<tr><th>Journal Manager</th><th>State</th></tr>
+	<tr><th>日志管理器</th><th>状态</th></tr>
   </thead>
   <tbody>
 	{#nn.NameJournalStatus}
@@ -200,25 +200,25 @@
   </tbody>
 </table>
 
-<div class="page-header"><h1>NameNode Storage</h1></div>
+<div class="page-header"><h1>NameNode 存储</h1></div>
 <table class="table" title="NameNode Storage">
-  <thead><tr><td><b>Storage Directory</b></td><td><b>Type</b></td><td><b>State</b></td></tr></thead>
+  <thead><tr><td><b>存储路径</b></td><td><b>类型</b></td><td><b>状态</b></td></tr></thead>
   {#nn.NameDirStatuses}
   {#active}{#helper_dir_status type="Active"/}{/active}
   {#failed}{#helper_dir_status type="Failed"/}{/failed}
   {/nn.NameDirStatuses}
 </table>
-<div class="page-header"><h1>DFS Storage Types</h1></div>
+<div class="page-header"><h1>DFS 存储类型</h1></div>
 <small>
 <table class="table">
   <thead>
     <tr>
-      <th>Storage Type</th>
-      <th>Configured Capacity</th>
-      <th>Capacity Used</th>
-      <th>Capacity Remaining</th>
-      <th>Block Pool Used</th>
-      <th>Nodes In Service</th>
+      <th>存储类型</th>
+      <th>容量</th>
+      <th>已使用</th>
+      <th>剩余</th>
+      <th>Block Pool 已使用</th>
+      <th>运行节点</th>
     </tr>
   </thead>
   {#blockstats.StorageTypeStats}
@@ -236,19 +236,19 @@
 </script>
 
 <script type="text/x-dust-template" id="tmpl-snapshot">
-<div class="page-header"><h1>Snapshot Summary</h1></div>
-<div class="page-header"><h1><small>Snapshottable directories: {@size key=SnapshottableDirectories}{/size}</small></div>
+<div class="page-header"><h1>快照总览</h1></div>
+<div class="page-header"><h1><small>可快照目录: {@size key=SnapshottableDirectories}{/size}</small></div>
 <small>
 <table class="table">
   <thead>
     <tr>
-      <th>Path</th>
-      <th>Snapshot Number</th>
-      <th>Snapshot Quota</th>
-      <th>Modification Time</th>
-      <th>Permission</th>
-      <th>Owner</th>
-      <th>Group</th>
+      <th>路径</th>
+      <th>快照数量</th>
+      <th>快照配额</th>
+      <th>修改时间</th>
+      <th>权限</th>
+      <th>所有者</th>
+      <th>用户组</th>
     </tr>
   </thead>
   {#SnapshottableDirectories}
@@ -265,15 +265,15 @@
 </table>
 </small>
 
-<div class="page-header"><h1><small>Snapshotted directories: {@size key=Snapshots}{/size}</small></div>
+<div class="page-header"><h1><small>已快照目录: {@size key=Snapshots}{/size}</small></div>
 
 <small>
 <table class="table">
   <thead>
     <tr>
-      <th>Snapshot ID</th>
-      <th>Snapshot Directory</th>
-      <th>Modification Time</th>
+      <th>快照 ID</th>
+      <th>快照目录</th>
+      <th>修改时间</th>
     </tr>
   </thead>
   {#Snapshots}
@@ -288,27 +288,27 @@
 </script>
 
 <script type="text/x-dust-template" id="tmpl-datanode">
-<div class="page-header"><h1>Datanode Information</h1></div>
+<div class="page-header"><h1>Datanode 信息</h1></div>
 <div>
   <ul class="dfshealth-node-legend">
-    <li class="dfshealth-node-icon dfshealth-node-alive">In service</li>
-    <li class="dfshealth-node-icon dfshealth-node-down">Down</li>
-    <li class="dfshealth-node-icon dfshealth-node-decommisioned">Decommisioned</li>
-    <li class="dfshealth-node-icon dfshealth-node-down-decommisioned">Decommissioned &amp; dead</li>
+    <li class="dfshealth-node-icon dfshealth-node-alive">运行中</li>
+    <li class="dfshealth-node-icon dfshealth-node-down">已停止</li>
+    <li class="dfshealth-node-icon dfshealth-node-decommisioned">已停用</li>
+    <li class="dfshealth-node-icon dfshealth-node-down-decommisioned">已停用 &amp; 挂掉</li>
   </ul>
 </div>
-<div class="page-header"><h1><small>In operation</small></h1></div>
+<div class="page-header"><h1><small>作业中</small></h1></div>
 <small>
 <table class="table" id="table-datanodes">
   <thead>
     <tr>
-      <th>Node</th>
-      <th>Http Address</th>
-      <th>Last contact</th>
-      <th style="width:180px; text-align:center">Capacity</th>
+      <th>节点</th>
+      <th>Http 地址</th>
+      <th>最近连接</th>
+      <th style="width:180px; text-align:center">容量</th>
       <th>Blocks</th>
-      <th>Block pool used</th>
-      <th>Version</th>
+      <th>Block pool 已使用</th>
+      <th>版本</th>
     </tr>
   </thead>
   {#LiveNodes}
@@ -350,7 +350,7 @@
 </table>
 </small>
 
-<div class="page-header"><h1><small>Decomissioning</small></h1></div>
+<div class="page-header"><h1><small>停用中</small></h1></div>
 <small>
 <table class="table">
   <thead>
@@ -364,11 +364,11 @@
   </thead>
   {#DecomNodes}
   <tr>
-    <td>{name} ({xferaddr})</td>
-    <td>{lastContact}</td>
-    <td>{underReplicatedBlocks}</td>
-    <td>{decommissionOnlyReplicas}</td>
-    <td>{underReplicateInOpenFiles}</td>
+    <th>节点</th>
+    <th>最近连接</th>
+    <th>待复制block</th>
+    <th>没有待复制Block </th>
+    <th>实施中文件<br/>待复制Block</th>
   </tr>
   {/DecomNodes}
 </table>
@@ -376,17 +376,17 @@
 </script>
 
 <script type="text/x-dust-template" id="tmpl-datanode-volume-failures">
-<div class="page-header"><h1>Datanode Volume Failures</h1></div>
+<div class="page-header"><h1>Datanode卷故障信息</h1></div>
 <small>
 {?LiveNodes}
 <table class="table">
   <thead>
     <tr>
-      <th>Node</th>
-      <th>Last Failure Date</th>
-      <th>Failed Volumes</th>
-      <th>Estimated Capacity Lost</th>
-      <th>Failed Storage Locations</th>
+      <th>节点</th>
+      <th>最近失败时间</th>
+      <th>失败卷</th>
+      <th>预计丢失容量</th>
+      <th>已故障存储路径</th>
     </tr>
   </thead>
   {#LiveNodes}
@@ -400,20 +400,20 @@
   {/LiveNodes}
 </table>
 {:else}
-There are no reported volume failures.
+没有故障
 {/LiveNodes}
 </small>
 </script>
 
 <script type="text/x-dust-template" id="tmpl-startup-progress">
-<div class="page-header"><h1>Startup Progress</h1></div>
-<p>Elapsed Time: {elapsedTime|fmt_time}, Percent Complete: {percentComplete|fmt_percentage}</p>
+<div class="page-header"><h1>启动进程</h1></div>
+<p>消耗时间: {elapsedTime|fmt_time}, 完成进度: {percentComplete|fmt_percentage}</p>
 <table class="table">
   <thead>
 	<tr class="active">
 	  <th>Phase</th>
-	  <th style="text-align:center">Completion</th>
-	  <th style="text-align:center">Elapsed Time</th>
+	  <th style="text-align:center">完成进度</th>
+	  <th style="text-align:center">消耗时间</th>
 	</tr>
   </thead>
   <tbody>

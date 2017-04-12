@@ -34,7 +34,7 @@ public class NMErrorsAndWarningsPage extends NMView {
   @Override
   protected void preHead(HtmlPage.Page.HTML<HtmlPage._> html) {
     commonPreHead(html);
-    String title = "Errors and Warnings in the NodeManager";
+    String title = "节点管理器错误及警告";
     setTitle(title);
     String tableId = "messages";
     set(DATATABLES_ID, tableId);

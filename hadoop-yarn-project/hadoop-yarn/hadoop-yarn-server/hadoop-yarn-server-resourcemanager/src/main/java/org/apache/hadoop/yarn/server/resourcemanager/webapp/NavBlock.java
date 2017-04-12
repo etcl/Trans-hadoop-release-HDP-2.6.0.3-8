@@ -43,30 +43,42 @@ public class NavBlock extends HtmlBlock {
     }
     UL<DIV<Hamlet>> mainList = html.
       div("#nav").
-        h3("Cluster").
+        h3("集群").
         ul().
-          li().a(url("cluster"), "About")._().
-          li().a(url("nodes"), "Nodes")._().
-          li().a(url("nodelabels"), "Node Labels")._();
+          li().a(url("cluster"), "关于")._().
+          li().a(url("nodes"), "节点")._().
+          li().a(url("nodelabels"), "节点标签")._();
     UL<LI<UL<DIV<Hamlet>>>> subAppsList = mainList.
-          li().a(url("apps"), "Applications").
+          li().a(url("apps"), "任务信息").
             ul();
     subAppsList.li()._();
     for (YarnApplicationState state : YarnApplicationState.values()) {
+      String stateLabel = "";
+       switch (state.toString()){
+         case "NEW": stateLabel = "新建";break;
+         case "NEW_SAVING": stateLabel = "保存中";break;
+         case "SUBMITTED": stateLabel = "已提交";break;
+         case "ACCEPTED": stateLabel = "已接受";break;
+         case "RUNNING": stateLabel = "运行中";break;
+         case "FINISHED": stateLabel = "已完成";break;
+         case "FAILED": stateLabel = "已失败";break;
+         case "KILLED": stateLabel = "已停止";break;
+         default:stateLabel = state.toString();break;
+       }
       subAppsList.
-              li().a(url("apps", state.toString()), state.toString())._();
+              li().a(url("apps", state.toString()), stateLabel)._();
     }
     subAppsList._()._();
     UL<DIV<Hamlet>> tools = mainList.
-          li().a(url("scheduler"), "Scheduler")._()._().
-        h3("Tools").ul();
-    tools.li().a("/conf", "Configuration")._().
-          li().a("/logs", "Local logs")._().
-          li().a("/stacks", "Server stacks")._().
-          li().a("/jmx?qry=Hadoop:*", "Server metrics")._();
+          li().a(url("scheduler"), "调度器")._()._().
+        h3("工具").ul();
+        tools.li().a("/conf", "配置")._().
+              li().a("/logs", "本地日志")._().
+              li().a("/stacks", "服务器stacks")._().
+              li().a("/jmx?qry=Hadoop:*", "服务器监视")._();
 
     if (addErrorsAndWarningsLink) {
-      tools.li().a(url("errors-and-warnings"), "Errors/Warnings")._();
+      tools.li().a(url("errors-and-warnings"), "错误及警告")._();
     }
     tools._()._();
   }

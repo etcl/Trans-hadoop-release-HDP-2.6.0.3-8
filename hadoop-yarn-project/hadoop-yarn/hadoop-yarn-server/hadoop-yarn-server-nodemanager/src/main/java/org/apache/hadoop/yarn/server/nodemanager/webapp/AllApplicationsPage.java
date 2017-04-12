@@ -43,7 +43,7 @@ public class AllApplicationsPage extends NMView {
 
   @Override protected void preHead(Page.HTML<_> html) {
     commonPreHead(html);
-    setTitle("Applications running on this node");
+    setTitle("节点应用信息");
     set(DATATABLES_ID, "applications");
     set(initID(DATATABLES, "applications"), appsTableInit());
     setTableStyles(html, "applications");
@@ -88,8 +88,8 @@ public class AllApplicationsPage extends NMView {
             .table("#applications")
               .thead()
                 .tr()
-                  .td()._("ApplicationId")._()
-                  .td()._("ApplicationState")._()
+                .td()._("应用ID")._()
+                .td()._("应用状态")._()
                 ._()
                ._()
                .tbody();

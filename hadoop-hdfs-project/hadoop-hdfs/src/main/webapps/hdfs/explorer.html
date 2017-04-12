@@ -32,16 +32,16 @@
       </div>
 
       <ul class="nav navbar-nav" id="ui-tabs">
-        <li><a href="dfshealth.html#tab-overview">Overview</a></li>
-        <li><a href="dfshealth.html#tab-datanode">Datanodes</a></li>
-        <li><a href="dfshealth.html#tab-datanode-volume-failures">Datanode Volume Failures</a></li>
-        <li><a href="dfshealth.html#tab-snapshot">Snapshot</a></li>
-        <li><a href="dfshealth.html#tab-startup-progress">Startup Progress</a></li>
+        <li><a href="dfshealth.html#tab-overview">总览</a></li>
+        <li><a href="dfshealth.html#tab-datanode">数据节点</a></li>
+        <li><a href="dfshealth.html#tab-datanode-volume-failures">节点卷故障</a></li>
+        <li><a href="dfshealth.html#tab-snapshot">快照</a></li>
+        <li><a href="dfshealth.html#tab-startup-progress">启动进程</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilities <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">工具 <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Browse the file system</a></li>
-            <li><a href="logs">Logs</a></li>
+            <li><a href="#">文件浏览</a></li>
+            <li><a href="logs">日志查看</a></li>
           </ul>
         </li>
       </ul>
@@ -60,7 +60,7 @@
 	    <hr />
 	    <div class="panel panel-success" id="file-info-blockinfo-panel">
 	      <div class="panel-heading">
-		Block information -- 
+		Block information --
 		<select class="btn btn-default" id="file-info-blockinfo-list">
 		</select>
 	      </div>
@@ -82,7 +82,7 @@
     </div>
     <div class="container">
       <div class="page-header">
-	<h1>Browse Directory</h1>
+	<h1>文件浏览</h1>
       </div>
       <div class="alert alert-danger" id="alert-panel" style="display:none">
 	<button type="button" class="close" onclick="$('#alert-panel').hide();">&times;</button>
@@ -100,7 +100,7 @@
 
       <div class="row">
         <hr />
-        <div class="col-xs-2"><p>Hadoop, {release-year-token}.</p></div>
+        <div class="col-xs-2"><p>Hadoop, 2016.</p></div>
       </div>
 
     </div>
@@ -109,14 +109,14 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Permission</th>
-            <th>Owner</th>
-            <th>Group</th>
-            <th>Size</th>
-            <th>Last Modified</th>
-            <th>Replication</th>
-            <th>Block Size</th>
-            <th>Name</th>
+            <th>权限</th>
+            <th>所有者</th>
+            <th>用户组</th>
+            <th>大小</th>
+            <th>最近更新</th>
+            <th>复制份数</th>
+            <th>Block 大小</th>
+            <th>名称</th>
           </tr>
         </thead>
         <tbody>

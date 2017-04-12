@@ -80,10 +80,10 @@ public class ApplicationPage extends NMView implements YarnWebParams {
               $(APPLICATION_ID));
       Application app = this.nmContext.getApplications().get(applicationID);
       AppInfo info = new AppInfo(app);
-      info("Application's information")
-            ._("ApplicationId", info.getId())
-            ._("ApplicationState", info.getState())
-            ._("User", info.getUser());
+      info("应用信息")
+            ._("应用Id", info.getId())
+            ._("应用状态", info.getState())
+            ._("用户", info.getUser());
       TABLE<Hamlet> containersListBody = html._(InfoBlock.class)
           .table("#containers");
       for (String containerIdStr : info.getContainers()) {

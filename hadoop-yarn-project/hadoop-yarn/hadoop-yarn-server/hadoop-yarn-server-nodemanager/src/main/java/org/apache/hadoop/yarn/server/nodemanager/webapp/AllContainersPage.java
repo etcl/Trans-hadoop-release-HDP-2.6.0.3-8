@@ -43,7 +43,7 @@ public class AllContainersPage extends NMView {
 
   @Override protected void preHead(Page.HTML<_> html) {
     commonPreHead(html);
-    setTitle("All containers running on this node");
+    setTitle("节点Containers信息");
     set(DATATABLES_ID, "containers");
     set(initID(DATATABLES, "containers"), containersTableInit());
     setTableStyles(html, "containers");
@@ -83,8 +83,8 @@ public class AllContainersPage extends NMView {
           .thead()
             .tr()
               .td()._("ContainerId")._()
-              .td()._("ContainerState")._()
-              .td()._("logs")._()
+              .td()._("Container状态")._()
+              .td()._("日志")._()
             ._()
           ._().tbody();
       for (Entry<ContainerId, Container> entry : this.nmContext

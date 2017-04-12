@@ -64,26 +64,26 @@ public class NodePage extends NMView {
     @Override
     protected void render(Block html) {
       NodeInfo info = new NodeInfo(this.context, this.resourceView);
-      info("NodeManager information")
-          ._("Total Vmem allocated for Containers",
+      info("节点管理器信息")
+          ._("Containers总虚拟内存",
               StringUtils.byteDesc(info.getTotalVmemAllocated() * BYTES_IN_MB))
-          ._("Vmem enforcement enabled",
+          ._("强制开启虚拟内存",
               info.isVmemCheckEnabled())
-          ._("Total Pmem allocated for Container",
+          ._("Container总物理内存",
               StringUtils.byteDesc(info.getTotalPmemAllocated() * BYTES_IN_MB))
-          ._("Pmem enforcement enabled",
+          ._("强制开启物理内存",
               info.isPmemCheckEnabled())
-           ._("Total VCores allocated for Containers",
-              String.valueOf(info.getTotalVCoresAllocated())) 
-          ._("NodeHealthyStatus",
+           ._("Containers总核数",
+              String.valueOf(info.getTotalVCoresAllocated()))
+          ._("节点正常标识",
               info.getHealthStatus())
-          ._("LastNodeHealthTime", new Date(
+          ._("节点状态更新时间", new Date(
               info.getLastNodeUpdateTime()))
-          ._("NodeHealthReport",
+          ._("节点状态报告",
               info.getHealthReport())
-          ._("Node Manager Version:", info.getNMBuildVersion() +
+          ._("Node Manager 版本:", info.getNMBuildVersion() +
               " on " + info.getNMVersionBuiltOn())
-          ._("Hadoop Version:", info.getHadoopBuildVersion() +
+          ._("Hadoop 版本:", info.getHadoopBuildVersion() +
               " on " + info.getHadoopVersionBuiltOn());
       html._(InfoBlock.class);
     }

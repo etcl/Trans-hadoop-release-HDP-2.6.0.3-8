@@ -38,7 +38,7 @@ public class AppAttemptPage extends RmView {
     set(
       TITLE,
       appAttemptId.isEmpty() ? "Bad request: missing application attempt ID"
-          : join("Application Attempt ",
+          : join("应用尝试 ",
             $(YarnWebParams.APPLICATION_ATTEMPT_ID)));
 
     set(DATATABLES_ID, "containers resourceRequests");

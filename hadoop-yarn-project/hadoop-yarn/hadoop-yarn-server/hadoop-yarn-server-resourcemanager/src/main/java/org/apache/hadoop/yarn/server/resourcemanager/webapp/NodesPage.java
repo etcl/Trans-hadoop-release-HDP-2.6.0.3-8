@@ -66,19 +66,19 @@ class NodesPage extends RmView {
       String labelFilter = $(NODE_LABEL, CommonNodeLabelsManager.ANY).trim();
       TBODY<TABLE<Hamlet>> tbody =
           html.table("#nodes").thead().tr()
-              .th(".nodelabels", "Node Labels")
-              .th(".rack", "Rack")
-              .th(".state", "Node State")
-              .th(".nodeaddress", "Node Address")
-              .th(".nodehttpaddress", "Node HTTP Address")
-              .th(".lastHealthUpdate", "Last health-update")
-              .th(".healthReport", "Health-report")
+              .th(".nodelabels", "节点标签")
+              .th(".rack", "机位")
+              .th(".state", "节点状态")
+              .th(".nodeaddress", "节点地址")
+              .th(".nodehttpaddress", "节点HTTP地址")
+              .th(".lastHealthUpdate", "状态更新时间")
+              .th(".healthReport", "状态报告")
               .th(".containers", "Containers")
-              .th(".mem", "Mem Used")
-              .th(".mem", "Mem Avail")
-              .th(".vcores", "VCores Used")
-              .th(".vcores", "VCores Avail")
-              .th(".nodeManagerVersion", "Version")._()._().tbody();
+              .th(".mem", "耗内存")
+              .th(".mem", "余内存")
+              .th(".vcores", "耗核")
+              .th(".vcores", "余核")
+              .th(".nodeManagerVersion", "版本")._()._().tbody();
       NodeState stateFilter = null;
       if (type != null && !type.isEmpty()) {
         stateFilter = NodeState.valueOf(StringUtils.toUpperCase(type));
@@ -154,7 +154,7 @@ class NodesPage extends RmView {
   protected void preHead(Page.HTML<_> html) {
     commonPreHead(html);
     String type = $(NODE_STATE);
-    String title = "Nodes of the cluster";
+    String title = "集群节点信息";
     if (type != null && !type.isEmpty()) {
       title = title + " (" + type + ")";
     }

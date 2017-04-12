@@ -41,8 +41,23 @@ public class RmView extends TwoColumnLayout {
 
     // Set the correct title.
     String reqState = $(APP_STATE);
-    reqState = (reqState == null || reqState.isEmpty() ? "All" : reqState);
-    setTitle(sjoin(reqState, "Applications"));
+    //reqState = (reqState == null || reqState.isEmpty() ? "All" : reqState);
+    //setTitle(sjoin(reqState, "Applications"));
+    String stateLabel = "";
+    stateLabel = (reqState == null || reqState.isEmpty() ? "全部" : reqState);
+    switch (reqState.toString()){
+      case "NEW": stateLabel = "新建";break;
+      case "NEW_SAVING": stateLabel = "保存中";break;
+      case "SUBMITTED": stateLabel = "已提交";break;
+      case "ACCEPTED": stateLabel = "已接受";break;
+      case "RUNNING": stateLabel = "运行中";break;
+      case "FINISHED": stateLabel = "已完成";break;
+      case "FAILED": stateLabel = "已失败";break;
+      case "KILLED": stateLabel = "已停止";break;
+      case "NEW,NEW_SAVING,SUBMITTED,ACCEPTED,RUNNING": stateLabel = "全部";break;
+      default:stateLabel = reqState.toString();break;
+    }
+    setTitle(sjoin(stateLabel, "应用"));
   }
 
   protected void commonPreHead(Page.HTML<_> html) {

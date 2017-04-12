@@ -24,9 +24,9 @@ import org.apache.hadoop.classification.InterfaceAudience;
 public class HeaderBlock extends HtmlBlock {
 
   @Override protected void render(Block html) {
-    String loggedIn = ""; 
+    String loggedIn = "";
     if (request().getRemoteUser() != null) {
-      loggedIn = "Logged in as: " + request().getRemoteUser();
+      loggedIn = "登录账户: " + request().getRemoteUser();
     }
     html.
       div("#header.ui-widget").
